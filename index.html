@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main-style.css">
+</head>
+
+<body class="books-page">
+    <header class="header">
+        <div class="menu">
+            <img id="burger" src="assets/menu.svg" alt="меню">
+            <h1>Все книги</h1>
+        </div>
+        <div class="actions">
+            <img src="assets/search.svg" alt="поиск">
+            <img src="assets/filter.svg" alt="фильтр">
+            <img src="assets/more-white.svg" alt="ещё">
+        </div>
+    </header>
+
+    <main class="bookshelf">
+        <div class="book">
+            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <div class="book-content">
+                <div class="book-name">
+                    <div class="book-info">
+                        <p class="title">Гарри Поттер</p>
+                        <p class="author">Джоан Роулинг</p>
+                    </div>
+                    <img class="more" src="assets/more-white.svg" alt="дополнительно">
+                </div>
+                <hr>
+                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+            </div>
+        </div>
+
+        <div class="book">
+            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <div class="book-content">
+                <div class="book-name">
+                    <div class="book-info">
+                        <p class="title">Гарри Поттер</p>
+                        <p class="author">Джоан Роулинг</p>
+                    </div>
+                    <img class="more" src="assets/more-white.svg" alt="дополнительно">
+                </div>
+                <hr>
+                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+            </div>
+        </div>
+
+        <div class="book">
+            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <div class="book-content">
+                <div class="book-name">
+                    <div class="book-info">
+                        <p class="title">Гарри Поттер</p>
+                        <p class="author">Джоан Роулинг</p>
+                    </div>
+                    <img class="more" src="assets/more-white.svg" alt="дополнительно">
+                </div>
+                <hr>
+                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+            </div>
+        </div>
+
+        <div class="book">
+            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <div class="book-content">
+                <div class="book-name">
+                    <div class="book-info">
+                        <p class="title">Гарри Поттер</p>
+                        <p class="author">Джоан Роулинг</p>
+                    </div>
+                    <img class="more" src="assets/more-white.svg" alt="дополнительно">
+                </div>
+                <hr>
+                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+            </div>
+        </div>
+    </main>
+   <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <aside class="sidebar" id="sidebar">
+        <header class="profile-header">
+            <a href="edit.html"><img src="assets/edit.svg" alt="Настройки" class="right-icon"></a>
+
+            <div class="profile-overlay">
+                <a href="profile.html"><img class="avatar" src="assets/user.svg" alt="Аватар"></a>
+                <a href="profile.html"><h2>Профиль</h2></a>
+            </div>
+        </header>
+
+        <main class="profile-main">
+            <ul class="profile-info">
+                <li><img class="icon1" src="assets/last.svg" alt=""> Список последних</li>
+                <li><img class="icon2" src="assets/shelf.svg" alt=""> Моя полка</li>
+                <li><img class="icon3" src="assets/book.svg" alt=""> Избранное</li>
+            </ul>
+
+
+            <div class="bottom-menu">
+                <div class="bottom-menu-item">
+                    <img class="bottom-menu-icon1" src="assets/settings.svg" alt="">
+                    <span>Настройки</span>
+                </div>
+                <div class="bottom-menu-item">
+                    <img class="bottom-menu-icon2" src="assets/info.svg" alt="">
+                    <span>Справка</span>
+                </div>
+                <div class="bottom-menu-item">
+                    <img class="bottom-menu-icon3" src="assets/exit.svg" alt="">
+                    <span>Выход</span>
+                </div>
+            </div>
+        </main>
+    </aside>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        // Открытие меню
+        burger.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+        });
+
+        // Закрытие меню
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        }
+
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+
+        // Предотвращаем закрытие при клике на само меню
+        sidebar.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+
+</html>
