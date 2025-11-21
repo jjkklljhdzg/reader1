@@ -30,12 +30,21 @@
     <section class="now-reading">
       <h3>Сейчас читает:</h3>
       <div class="books">
-        <img src="assets/book.png" alt="">
-        <img src="assets/book.png" alt="">
+        <img src="assets/book1.png" alt="">
+        <img src="assets/book2.png" alt="">
       </div>
     </section>
   </main>
 
+  <script>
+    // Загрузка сохраненного шрифта
+    window.addEventListener('DOMContentLoaded', function() {
+      const savedFont = localStorage.getItem('appFont');
+      if (savedFont) {
+        document.body.style.fontFamily = savedFont;
+      }
+    });
+  </script>
 
 </body>
 

@@ -166,6 +166,22 @@ form input {
   font-family: "Loreley";
   src: url(assets/Loreley\ Antiqua.ttf);
 }
+@font-face {
+  font-family: "Wentrisor";
+  src: url(assets/Wentrisor.ttf);
+}
+@font-face {
+  font-family: "Orpheus";
+  src: url(assets/Orpheus.ttf);
+}
+@font-face {
+  font-family: "Cruinn";
+  src: url(assets/Cruinn\ Medium.ttf);
+}
+@font-face {
+  font-family: "Cezanne";
+  src: url(assets/p22-cezanne-pro.otf);
+}
 
 /* Планшеты (481px - 768px) */
 @media screen and (min-width: 481px) {

@@ -33,4 +33,16 @@
       <button type="submit">Сохранить новые данные</button>
     </div>
   </main>
+
+  <script>
+    // Загрузка сохраненного шрифта
+    window.addEventListener('DOMContentLoaded', function() {
+      const savedFont = localStorage.getItem('appFont');
+      if (savedFont) {
+        document.body.style.fontFamily = savedFont;
+      }
+    });
+  </script>
+  
 </body>
+</html>

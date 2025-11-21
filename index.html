@@ -23,66 +23,67 @@
 
     <main class="bookshelf">
         <div class="book">
-            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <img class="book-img" src="assets/book1.png" alt="Обложка книги">
             <div class="book-content">
                 <div class="book-name">
                     <div class="book-info">
-                        <p class="title">Гарри Поттер</p>
+                        <p class="title">Гарри Поттер и философский камень</p>
                         <p class="author">Джоан Роулинг</p>
                     </div>
                     <img class="more" src="assets/more-white.svg" alt="дополнительно">
                 </div>
                 <hr>
-                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+                <p class="description">Одиннадцатилетний мальчик-сирота Гарри Поттер живет в семье своей тетки и даже не подозревает, что он - настоящий волшебник...</p>
             </div>
         </div>
 
         <div class="book">
-            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <img class="book-img" src="assets/book2.png" alt="Обложка книги">
             <div class="book-content">
                 <div class="book-name">
                     <div class="book-info">
-                        <p class="title">Гарри Поттер</p>
+                        <p class="title">Гарри Поттер и тайная комната</p>
                         <p class="author">Джоан Роулинг</p>
                     </div>
                     <img class="more" src="assets/more-white.svg" alt="дополнительно">
                 </div>
                 <hr>
-                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+                <p class="description">Гарри возвращается в Хогвартс на второй год обучения, где начинает слышать таинственный голос...</p>
             </div>
         </div>
 
         <div class="book">
-            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <img class="book-img" src="assets/book3.png" alt="Обложка книги">
             <div class="book-content">
                 <div class="book-name">
                     <div class="book-info">
-                        <p class="title">Гарри Поттер</p>
+                        <p class="title">Гарри Поттер и узник Азкабана</p>
                         <p class="author">Джоан Роулинг</p>
                     </div>
                     <img class="more" src="assets/more-white.svg" alt="дополнительно">
                 </div>
                 <hr>
-                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+                <p class="description">Гарри Поттер, Рон и Гермиона возвращаются на третий курс Хогвартса, который омрачен побегом из тюрьмы Азкабан...</p>
             </div>
         </div>
 
         <div class="book">
-            <img class="book-img" src="assets/book.png" alt="Обложка книги">
+            <img class="book-img" src="assets/book4.png" alt="Обложка книги">
             <div class="book-content">
                 <div class="book-name">
                     <div class="book-info">
-                        <p class="title">Гарри Поттер</p>
+                        <p class="title">Гарри Поттер и кубок огня</p>
                         <p class="author">Джоан Роулинг</p>
                     </div>
                     <img class="more" src="assets/more-white.svg" alt="дополнительно">
                 </div>
                 <hr>
-                <p class="description">KNwlejhfuwb wjebfwi kwhbvfv kwjshbfiy...</p>
+                <p class="description">Гарри Поттер, Рон и Гермиона возвращаются на четвёртый курс школы чародейства и волшебства Хогвартс...</p>
             </div>
         </div>
     </main>
-   <div class="sidebar-overlay" id="sidebarOverlay"></div>
+   
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     
     <aside class="sidebar" id="sidebar">
         <header class="profile-header">
@@ -101,9 +102,8 @@
                 <li><img class="icon3" src="assets/book.svg" alt=""> Избранное</li>
             </ul>
 
-
             <div class="bottom-menu">
-                <div class="bottom-menu-item">
+                <div class="bottom-menu-item" id="settingsBtn">
                     <img class="bottom-menu-icon1" src="assets/settings.svg" alt="">
                     <span>Настройки</span>
                 </div>
@@ -119,10 +119,36 @@
         </main>
     </aside>
 
+    <!-- Модальное окно выбора шрифта -->
+    <div id="fontModal" class="modal">
+        <div class="modal-content">
+            <h3>Выберите шрифт для приложения</h3>
+            <select id="fontSelector">
+                <option value="">Загрузка шрифтов...</option>
+            </select>
+            <div class="modal-actions">
+                <button id="saveFontBtn">Сохранить</button>
+                <button id="closeFontModal">Отмена</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const burger = document.getElementById('burger');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const settingsBtn = document.getElementById('settingsBtn');
+
+        // Элементы модального окна
+        const fontModal = document.getElementById('fontModal');
+        const fontSelector = document.getElementById('fontSelector');
+        const saveFontBtn = document.getElementById('saveFontBtn');
+        const closeFontModal = document.getElementById('closeFontModal');
+
+        let fontDB;
+        const FONT_DB_NAME = 'AppFontDatabase';
+        const FONT_DB_VERSION = 1;
+        const FONT_STORE_NAME = 'appFonts';
 
         // Открытие меню
         burger.addEventListener('click', function() {
@@ -142,12 +168,139 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeSidebar();
+                fontModal.classList.remove('active');
             }
         });
 
         // Предотвращаем закрытие при клике на само меню
         sidebar.addEventListener('click', function(event) {
             event.stopPropagation();
+        });
+
+        // Инициализация базы данных шрифтов при загрузке
+        window.addEventListener('DOMContentLoaded', function() {
+            initFontDatabase();
+            loadSavedFont(); // Загружаем сохраненный шрифт
+        });
+
+        // Обработчик клика на настройки в боковом меню
+        settingsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeSidebar(); // Закрываем боковое меню
+            setTimeout(() => {
+                fontModal.classList.add('active'); // Открываем модальное окно
+            }, 300);
+        });
+
+        // Закрытие модального окна
+        closeFontModal.addEventListener('click', function() {
+            fontModal.classList.remove('active');
+        });
+
+        // Сохранение выбранного шрифта
+        saveFontBtn.addEventListener('click', function() {
+            const selectedFont = fontSelector.value;
+            if (selectedFont) {
+                // Сохраняем в localStorage
+                localStorage.setItem('appFont', selectedFont);
+                // Применяем шрифт ко всей странице
+                applyFontToPage(selectedFont);
+                fontModal.classList.remove('active');
+            }
+        });
+
+        // Инициализация базы данных шрифтов
+        function initFontDatabase() {
+            const request = indexedDB.open(FONT_DB_NAME, FONT_DB_VERSION);
+
+            request.onupgradeneeded = (event) => {
+                fontDB = event.target.result;
+                
+                if (!fontDB.objectStoreNames.contains(FONT_STORE_NAME)) {
+                    const store = fontDB.createObjectStore(FONT_STORE_NAME, {
+                        keyPath: 'id',
+                        autoIncrement: true
+                    });
+                    store.createIndex('family', 'family', { unique: true });
+                    
+                    // Стандартные шрифты
+                    const defaultFonts = [
+                        { family: 'Loreley' },
+                        { family: 'Cezanne' },
+                        { family: 'Wentrisor' },
+                        { family: 'Orpheus' },
+                        { family: 'Cruinn' }
+                    ];
+                    
+                    defaultFonts.forEach(font => store.add(font));
+                }
+            };
+
+            request.onsuccess = (event) => {
+                fontDB = event.target.result;
+                loadFontsIntoSelector();
+            };
+
+            request.onerror = (event) => {
+                console.error('Ошибка при открытии базы данных шрифтов:', event.target.error);
+            };
+        }
+
+        // Загрузка шрифтов в выпадающий список
+        function loadFontsIntoSelector() {
+            if (!fontDB) return;
+
+            const transaction = fontDB.transaction([FONT_STORE_NAME], 'readonly');
+            const store = transaction.objectStore(FONT_STORE_NAME);
+            const request = store.getAll();
+
+            request.onsuccess = () => {
+                const fonts = request.result;
+                fontSelector.innerHTML = '<option value="">Выберите шрифт</option>';
+                
+                fonts.forEach(font => {
+                    const option = document.createElement('option');
+                    option.value = font.family;
+                    const fontName = font.family.split(',')[0];
+                    option.textContent = fontName;
+                    option.style.fontFamily = font.family;
+                    fontSelector.appendChild(option);
+                });
+
+                // Устанавливаем выбранный шрифт в селекторе
+                const savedFont = localStorage.getItem('appFont');
+                if (savedFont) {
+                    for (let i = 0; i < fontSelector.options.length; i++) {
+                        if (fontSelector.options[i].value === savedFont) {
+                            fontSelector.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            };
+        }
+
+        // Применение шрифта ко всей странице
+        function applyFontToPage(fontFamily) {
+            document.body.style.fontFamily = fontFamily;
+            
+            // Сохраняем в localStorage для других страниц
+            localStorage.setItem('appFont', fontFamily);
+        }
+
+        // Загрузка сохраненного шрифта
+        function loadSavedFont() {
+            const savedFont = localStorage.getItem('appFont');
+            if (savedFont) {
+                applyFontToPage(savedFont);
+            }
+        }
+
+        // Закрытие модального окна при клике вне его
+        fontModal.addEventListener('click', function(e) {
+            if (e.target === fontModal) {
+                fontModal.classList.remove('active');
+            }
         });
     </script>
 </body>
